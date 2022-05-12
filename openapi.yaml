@@ -1,0 +1,136 @@
+openapi: 3.0.1
+info:
+  title: OpenAPI definition
+  version: v0
+servers:
+  - url: http://localhost:8081
+    description: Generated server url
+paths:
+  /subtract:
+    post:
+      tags:
+        - math-solve-controller
+      operationId: subtract
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MathSolve'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/MathSolve'
+  /multiply:
+    post:
+      tags:
+        - math-solve-controller
+      operationId: multiply
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MathSolve'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/MathSolve'
+  /divide:
+    post:
+      tags:
+        - math-solve-controller
+      operationId: divide
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MathSolve'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/MathSolve'
+  /add:
+    post:
+      tags:
+        - math-solve-controller
+      operationId: add
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MathSolve'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/MathSolve'
+  /randomMonth:
+    get:
+      tags:
+        - month-controller
+      operationId: getRandomMonth
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Month'
+  /month/{num}:
+    get:
+      tags:
+        - month-controller
+      operationId: getMonth
+      parameters:
+        - name: num
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Month'
+components:
+  schemas:
+    MathSolve:
+      required:
+        - operand1
+        - operand2
+      type: object
+      properties:
+        operand1:
+          type: integer
+          format: int32
+        operand2:
+          type: integer
+          format: int32
+        operation:
+          type: string
+        solution:
+          type: integer
+          format: int32
+    Month:
+      type: object
+      properties:
+        num:
+          type: string
+        name:
+          type: string
