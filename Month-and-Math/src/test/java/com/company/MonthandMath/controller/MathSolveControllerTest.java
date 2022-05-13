@@ -12,6 +12,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
+
+import java.util.HashMap;
+import java.util.Map;
+
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -106,5 +110,20 @@ public class MathSolveControllerTest {
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().json(outputString));
+    }
+
+    @Test
+    public void shouldReturn422Operand2As0() throws Exception {
+        MathSolve input = new MathSolve();
+        input.setOperand1(4);
+        input.setOperand2(0);
+        String inputString = mapper.writeValueAsString(input);
+
+        mockMvc.perform(post("/divide")
+                        .content(inputString)
+                        .contentType(MediaType.APPLICATION_JSON)
+                )
+                .andDo(print())
+                .andExpect(status().isUnprocessableEntity());
     }
 }
